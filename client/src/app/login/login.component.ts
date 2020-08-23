@@ -3,6 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../shared/services/user.service';
 import {first} from 'rxjs/operators';
+import { Role } from '../shared/models/User';
 
 
 @Component({
@@ -48,11 +49,13 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.userService.login(this.loginForm.get('email').value, this.loginForm.get('password').value, this.loginForm.get('remember').value)
       .pipe(first())
-      .subscribe(() => {
+      .subscribe( async (user) => {
         this.loading = false;
-        this.router.navigateByUrl('/user').catch(err => {
-          console.log(err);
-        });
+        if (user.role === Role.ADMIN) {
+          await this.router.navigateByUrl('/admin');
+        } else if (user.role === Role.USER) {
+          await this.router.navigateByUrl('/user');
+        }
       }, err => {
         this.loading = false;
         console.log(err);

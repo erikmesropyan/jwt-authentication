@@ -1,8 +1,8 @@
 <div class="row justify-content-center">
   <div class="col-6 mt-5">
-<!--    <div class="alert alert-danger" role="alert">-->
-<!--      This is a danger alert—check it out!-->
-<!--    </div>-->
+    <div *ngIf="message" class="alert" [ngClass]="status === 'success'? 'alert-success': 'alert-danger'" role="alert">
+     {{message}}
+    </div>
     <div class="card">
       <div class="card-header">
         <h2>Register</h2>
@@ -10,19 +10,11 @@
       <div class="card-body">
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" formControlName="firstName" class="form-control"
-                   [ngClass]="{ 'is-invalid': submitted && form.firstName.errors }"/>
-            <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
-              <div *ngIf="form.firstName.errors.required">First Name is required</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" formControlName="lastName" class="form-control"
-                   [ngClass]="{ 'is-invalid': submitted && form.lastName.errors }"/>
-            <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
-              <div *ngIf="form.lastName.errors.required">Last Name is required</div>
+            <label for="firstName">Name</label>
+            <input type="text" id="firstName" formControlName="name" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && form.name.errors }"/>
+            <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+              <div *ngIf="form.name.errors.required">Name is required</div>
             </div>
           </div>
           <div class="form-group">

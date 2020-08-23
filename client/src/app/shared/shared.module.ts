@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {UserComponent} from './components/user/user.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    LogoutComponent,
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    UserComponent
+    UserComponent,
+    LogoutComponent
   ]
 })
 export class SharedModule { }
